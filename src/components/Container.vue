@@ -1,8 +1,6 @@
 <template>
   <div>
-    <Post :data="data[0]" />
-    <!-- <Post :data="data" />
-    <Post :data="data" /> -->
+    <Post v-for="(item, idx) in data" :key="idx" :data="item" />
   </div>
 </template>
 
