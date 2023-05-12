@@ -9,7 +9,7 @@
     <img src="./assets/logo.png" class="logo" />
   </div>
 
-  <Container :data="data" />
+  <Container :data="data" :step="step" @changePage="changePage($event)" />
   <button @click="more">더보기</button>
 
   <div class="footer">
@@ -19,13 +19,13 @@
     </ul>
   </div>
 
-  <h2>탭만들기</h2>
+  <!-- <h2>탭만들기</h2>
   <div class="tab-content" v-if="step == 0">내용0</div>
   <div class="tab-content" v-if="step == 1">내용1</div>
   <div class="tab-content" v-if="step == 2">내용2</div>
   <button @click="step = 0">버튼 0</button>
   <button @click="step = 1">버튼 1</button>
-  <button @click="step = 2">버튼 2</button>
+  <button @click="step = 2">버튼 2</button> -->
 </template>
 
 <script>
@@ -75,6 +75,10 @@ export default {
           this.data.push(result.data);
           this.cnt++;
         });
+    },
+
+    changePage(step) {
+      this.step = step;
     },
   },
 };
