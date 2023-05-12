@@ -6,6 +6,7 @@
 
     <div v-if="this.step == 0">
       <Post v-for="(item, idx) in data" :key="idx" :data="item" />
+      <button @click="$emit('more')">더보기</button>
     </div>
 
     <div v-if="this.step == 1">

@@ -9,8 +9,12 @@
     <img src="./assets/logo.png" class="logo" />
   </div>
 
-  <Container :data="data" :step="step" @changePage="changePage($event)" />
-  <button @click="more">더보기</button>
+  <Container
+    :data="data"
+    :step="step"
+    @changePage="changePage($event)"
+    @more="more"
+  />
 
   <div class="footer">
     <ul class="footer-button-plus">
