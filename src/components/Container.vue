@@ -21,7 +21,18 @@
           :imgUrl="imgUrl"
           :key="idx"
           :filter="name"
-        ></FilterBox>
+        >
+          {{ name }}
+
+          <!-- # 슬롯 여러개 사용하기
+            <template v-slot:a>a빵꾸에 들어간다 </template>
+          <template v-slot:b>b빵꾸에 들어간다 </template> -->
+
+          <!-- #슬롯 자식 데이터 받아오기
+            <template v-slot:default="작명">
+            <span>{{ 작명.msg }}</span></template
+          > -->
+        </FilterBox>
       </div>
     </div>
 
