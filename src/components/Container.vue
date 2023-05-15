@@ -13,14 +13,15 @@
       <!-- 필터선택페이지 -->
       <div
         class="upload-image"
-        :style="{ backgroundImage: `url(${this.imgUrl})` }"
+        :style="`background-image: url(${this.imgUrl})`"
       ></div>
       <div class="filters">
-        <div class="filter-1"></div>
-        <div class="filter-1"></div>
-        <div class="filter-1"></div>
-        <div class="filter-1"></div>
-        <div class="filter-1"></div>
+        <FilterBox
+          v-for="(name, idx) in filterArray"
+          :imgUrl="imgUrl"
+          :key="idx"
+          :filter="name"
+        ></FilterBox>
       </div>
     </div>
 
@@ -44,11 +45,45 @@ write!</textarea
 
 <script>
 import Post from "./Post.vue";
+import FilterBox from "./FilterBox.vue";
 
 export default {
   name: "Container",
+  data() {
+    return {
+      filterArray: [
+        "aden",
+        "_1977",
+        "brannan",
+        "brooklyn",
+        "clarendon",
+        "earlybird",
+        "gingham",
+        "hudson",
+        "inkwell",
+        "kelvin",
+        "lark",
+        "lofi",
+        "maven",
+        "mayfair",
+        "moon",
+        "nashville",
+        "perpetua",
+        "reyes",
+        "rise",
+        "slumber",
+        "stinson",
+        "toaster",
+        "valencia",
+        "walden",
+        "willow",
+        "xpro2",
+      ],
+    };
+  },
   components: {
     Post,
+    FilterBox,
   },
   props: {
     data: Array,
