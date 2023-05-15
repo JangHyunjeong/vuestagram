@@ -1,8 +1,8 @@
 <template>
   <div>
-    <button @click="$emit('changePage', 0)">포스팅리스트</button>
+    <!-- <button @click="$emit('changePage', 0)">포스팅리스트</button>
     <button @click="$emit('changePage', 1)">필터선택</button>
-    <button @click="$emit('changePage', 2)">글작성</button>
+    <button @click="$emit('changePage', 2)">글작성</button> -->
 
     <div v-if="this.step == 0">
       <Post v-for="(item, idx) in data" :key="idx" :data="item" />
@@ -11,7 +11,10 @@
 
     <div v-if="this.step == 1">
       <!-- 필터선택페이지 -->
-      <div class="upload-image"></div>
+      <div
+        class="upload-image"
+        :style="{ backgroundImage: `url(${this.imgUrl})` }"
+      ></div>
       <div class="filters">
         <div class="filter-1"></div>
         <div class="filter-1"></div>
@@ -23,9 +26,17 @@
 
     <div v-if="this.step == 2">
       <!-- 글작성페이지 -->
-      <div class="upload-image"></div>
+      <div
+        class="upload-image"
+        :style="{ backgroundImage: `url(${this.imgUrl})` }"
+      ></div>
       <div class="write">
-        <textarea class="write-box">write!</textarea>
+        <textarea
+          class="write-box"
+          @change="$emit('getContent', $event.target.value)"
+        >
+write!</textarea
+        >
       </div>
     </div>
   </div>
@@ -42,6 +53,7 @@ export default {
   props: {
     data: Array,
     step: Number,
+    imgUrl: String,
   },
 };
 </script>

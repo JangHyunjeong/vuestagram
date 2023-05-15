@@ -4,7 +4,8 @@
       <li>Cancel</li>
     </ul>
     <ul class="header-button-right">
-      <li>Next</li>
+      <li v-if="step == 1" @click="step = step + 1">Next</li>
+      <li v-if="step == 2" @click="publish">발행</li>
     </ul>
     <img src="./assets/logo.png" class="logo" />
   </div>
@@ -12,24 +13,27 @@
   <Container
     :data="data"
     :step="step"
+    :imgUrl="imgUrl"
     @changePage="changePage($event)"
+    @getContent="getContent($event)"
     @more="more"
   />
 
   <div class="footer">
     <ul class="footer-button-plus">
-      <input type="file" id="file" class="inputfile" />
+      <!-- multiple : 여러개의 파일 받기 -->
+      <!-- accept="image/*" : 이미지만 보여주세요 .. js .type으로 검사하기-->
+      <input
+        @change="uploadPhoto"
+        multiple
+        accept="image/*"
+        type="file"
+        id="file"
+        class="inputfile"
+      />
       <label for="file" class="input-plus">+</label>
     </ul>
   </div>
-
-  <!-- <h2>탭만들기</h2>
-  <div class="tab-content" v-if="step == 0">내용0</div>
-  <div class="tab-content" v-if="step == 1">내용1</div>
-  <div class="tab-content" v-if="step == 2">내용2</div>
-  <button @click="step = 0">버튼 0</button>
-  <button @click="step = 1">버튼 1</button>
-  <button @click="step = 2">버튼 2</button> -->
 </template>
 
 <script>
@@ -48,6 +52,18 @@ import axios from "axios";
 // axios.get(); // 이게 get 요청하는 법임
 // axios.post(); // 이게 post 요청하는 법임
 
+// # 이미지 업로드 한걸 HTML에 보여주려면?
+//   #1. 전통적인 방법
+//   1) 업로드한 서버로 보내고 저장시킴
+//   2) 저장된 URL을 img src="" 에 넣어줌
+
+//   #2. 요즘은 브라우저에서 이미지 다루는 함수 씀
+//   1) FileReader() API 쓰거나
+//    - 파일을 글자로 변환해줌
+//   2) URL.createObjectURL() 사용 - 요고 사용
+//    - 가상의 이미지 URL을 생성해줌
+// ... 업로드 후엔 다음페이지로 보내야함. + 업로드한 이미지 띄우기
+
 export default {
   name: "App",
   data() {
@@ -55,6 +71,8 @@ export default {
       data: data,
       cnt: 0,
       step: 0,
+      imgUrl: "",
+      content: "",
     };
   },
   components: {
@@ -83,6 +101,37 @@ export default {
 
     changePage(step) {
       this.step = step;
+    },
+
+    uploadPhoto(e) {
+      let file = e.target.files;
+      // console.log(file[0].type); // .type 파일 타입 제한은 여기서
+      let url = URL.createObjectURL(file[0]); // 이미지 임시 url생성
+      // blob : 컴퓨터 안에 있는 파일은 모두 binary데이터(0과 1로 이뤄진 데이터)
+      // binary데이터를 다룰때는 BLOB라는 Object에 담아서 담음(Binary Large Object) -> 담아서 이미지 조작 가능
+      this.imgUrl = url;
+      this.step = 1;
+    },
+
+    getContent(value) {
+      var content = value;
+      this.content = content;
+    },
+
+    publish() {
+      var currentData = {
+        name: "Kim Hyun",
+        userImage: "https://placeimg.com/100/100/arch",
+        postImage: this.imgUrl,
+        likes: 36,
+        date: "May 15",
+        liked: false,
+        content: this.content,
+        filter: "perpetua",
+      };
+
+      this.data.unshift(currentData);
+      this.step = 0;
     },
   },
 };
