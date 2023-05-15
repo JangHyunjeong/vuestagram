@@ -14,6 +14,7 @@
     :data="data"
     :step="step"
     :imgUrl="imgUrl"
+    :선택한필터="선택한필터"
     @changePage="changePage($event)"
     @getContent="getContent($event)"
     @more="more"
@@ -73,7 +74,20 @@ export default {
       step: 0,
       imgUrl: "",
       content: "",
+      선택한필터: "",
     };
+  },
+  mounted() {
+    // # mitt가져오기
+    // this.emitter.on("작명", (a) => {
+    //   // 작명이라는 이벤트 발사하면 수신해주시오.
+    //   console.log(a);
+    // });
+    // 많이쓰면 안됩니다. 관리가 힘들어짐  --> vuex 쓰는게 나음
+
+    this.emitter.on("박스클릭함", (a) => {
+      this.선택한필터 = a;
+    });
   },
   components: {
     Container,
@@ -127,7 +141,7 @@ export default {
         date: "May 15",
         liked: false,
         content: this.content,
-        filter: "perpetua",
+        filter: this.선택한필터,
       };
 
       this.data.unshift(currentData);

@@ -5,13 +5,19 @@
     <button @click="$emit('changePage', 2)">글작성</button> -->
 
     <div v-if="this.step == 0">
-      <Post v-for="(item, idx) in data" :key="idx" :data="item" />
+      <Post
+        v-for="(item, idx) in data"
+        :key="idx"
+        :data="item"
+        :filter="filter"
+      />
       <button @click="$emit('more')">더보기</button>
     </div>
 
     <div v-if="this.step == 1">
       <!-- 필터선택페이지 -->
       <div
+        :class="선택한필터"
         class="upload-image"
         :style="`background-image: url(${this.imgUrl})`"
       ></div>
@@ -39,6 +45,7 @@
     <div v-if="this.step == 2">
       <!-- 글작성페이지 -->
       <div
+        :class="선택한필터"
         class="upload-image"
         :style="{ backgroundImage: `url(${this.imgUrl})` }"
       ></div>
@@ -100,6 +107,8 @@ export default {
     data: Array,
     step: Number,
     imgUrl: String,
+    filter: String,
+    선택한필터: String,
   },
 };
 </script>

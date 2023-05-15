@@ -3,6 +3,9 @@
     :class="`${filter} filter-1`"
     :style="{ backgroundImage: `url(${this.imgUrl})` }"
   >
+    <slot></slot>
+    <button @click="fire">버튼</button>
+
     <!-- #1. slot 으로 부모 - 자식 데이터 전송법
   1. 자식 : 구멍 뚫기 
   <slot></slot>
@@ -12,7 +15,6 @@
 
   ** slot은 html안에 데이터 바인딩하는 경우만 쓸수있음. 클래스에 추가한다던가... 그런건 props 써야함
   -->
-    <slot></slot>
 
     <!-- 
     #2. solt 여러개 사용하는 법
@@ -42,6 +44,15 @@ export default {
     return {
       msg: "슬롯테스트",
     };
+  },
+  // mitt로 데이터 전송한느 법
+  // 1. 자식 : this.emitter.emit()로 발사
+  // 2. 부모 : this.emitter.on()으로 수신
+  methods: {
+    fire() {
+      //this.emitter.emit("작명", "데이터");
+      this.emitter.emit("박스클릭함", this.filter);
+    },
   },
   props: {
     imgUrl: String,
