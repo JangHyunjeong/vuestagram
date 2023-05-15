@@ -35,6 +35,18 @@
       <label for="file" class="input-plus">+</label>
     </ul>
   </div>
+
+  <!-- # vuex에 저장된 데이터 가져오는법-->
+  <!-- 1. $store.state.변수명
+  <h4>안녕 {{ $store.state.name }}</h4>
+
+  2. 변경도 유롭게 가능하다. 하지만.. 그러지 말자. 추적이 매우매우 어렵다.
+  <button @click="$store.state.name = 'Park'">vuex state 바꾸기</button>
+
+  3. vuex 수정 국룰 
+  1) 미리 store.js에 수정 방법을 정의해두고 
+  2) 그 방법을
+  컴포넌트에서 소환해서 수정해야함. -->
 </template>
 
 <script>

@@ -11,4 +11,8 @@ let app = createApp(App);
 // 글로벌하게 emitter를 막 사용할라고 설정해둔거임
 app.config.globalProperties.emitter = emitter;
 
-app.mount("#app");
+// vuex 설치
+import store from "./store.js";
+
+// use(store) : 모든 컴포넌트들이 store.js 직접 참고 가능하다.
+app.use(store).mount("#app");
