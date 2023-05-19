@@ -11,9 +11,10 @@
       :class="`${data.filter}`"
       class="post-body"
       :style="{ backgroundImage: `url(${data.postImage})` }"
+      @click="$store.commit('좋아요')"
     ></div>
     <div class="post-content">
-      <p>{{ data.likes }} Likes</p>
+      <p>{{ $store.state.like }} Likes</p>
       <p>
         <strong>{{ data.name }}</strong> {{ data.content }}
       </p>

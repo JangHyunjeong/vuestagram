@@ -47,6 +47,21 @@
   1) 미리 store.js에 수정 방법을 정의해두고 
   2) 그 방법을
   컴포넌트에서 소환해서 수정해야함. -->
+
+  <!-- 올바른 vuex 사용법 
+  vuex사용시에는 store.js에서 이벤트 짜달라고 부탁해야함 
+
+  1. store.js에 state 수정방법 정의
+    - mutations:{} 안에 함수로 정의
+
+  2. 수정하고 싶으면 store.js에 부탁
+    - $store.commit('함수명')
+  -->
+  <h4>안녕 {{ $store.state.name }}</h4>
+  <button @click="$store.commit('이름변경')">vuex state 바꾸기</button>
+
+  <h4>나이 {{ $store.state.age }}</h4>
+  <button @click="$store.commit('나이변경', 10)">나이변경</button>
 </template>
 
 <script>
