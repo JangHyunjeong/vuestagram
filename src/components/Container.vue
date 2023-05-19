@@ -6,10 +6,11 @@
 
     <div v-if="this.step == 0">
       <Post
-        v-for="(item, idx) in data"
+        v-for="(item, idx) in $store.state.data"
         :key="idx"
         :data="item"
         :filter="filter"
+        :idx="idx"
       />
       <button @click="$emit('more')">더보기</button>
     </div>
@@ -104,7 +105,7 @@ export default {
     FilterBox,
   },
   props: {
-    data: Array,
+    // data: Array,
     step: Number,
     imgUrl: String,
     filter: String,

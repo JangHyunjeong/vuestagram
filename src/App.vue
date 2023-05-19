@@ -11,7 +11,6 @@
   </div>
 
   <Container
-    :data="data"
     :step="step"
     :imgUrl="imgUrl"
     :선택한필터="선택한필터"
@@ -56,17 +55,17 @@
 
   2. 수정하고 싶으면 store.js에 부탁
     - $store.commit('함수명')
+    <h4>안녕 {{ $store.state.name }}</h4>
+    <button @click="$store.commit('이름변경')">vuex state 바꾸기</button>
+  
+    <h4>나이 {{ $store.state.age }}</h4>
+    <button @click="$store.commit('나이변경', 10)">나이변경</button>
   -->
-  <h4>안녕 {{ $store.state.name }}</h4>
-  <button @click="$store.commit('이름변경')">vuex state 바꾸기</button>
-
-  <h4>나이 {{ $store.state.age }}</h4>
-  <button @click="$store.commit('나이변경', 10)">나이변경</button>
 </template>
 
 <script>
 import Container from "./components/Container.vue";
-import data from "./data.js";
+// import data from "./data.js";
 import axios from "axios";
 // # 1. ajax 사용하는 법 (get, post로 데이터 요청하기)
 // 1. axios 사용 - 이렇게 많이 씀
@@ -96,7 +95,7 @@ export default {
   name: "App",
   data() {
     return {
-      data: data,
+      //data: data,
       cnt: 0,
       step: 0,
       imgUrl: "",
@@ -135,7 +134,7 @@ export default {
           // get요청 성공시 함수 실행 .then
           // 요청 성공시 실행할 코드
           // get 요청으로 가져온 결과값은 result(위에 파라미터) 에 저장된다.
-          this.data.push(result.data);
+          this.$store.state.data.push(result.data);
           this.cnt++;
         });
     },
@@ -171,7 +170,7 @@ export default {
         filter: this.선택한필터,
       };
 
-      this.data.unshift(currentData);
+      this.$store.state.data.unshift(currentData);
       this.step = 0;
     },
   },

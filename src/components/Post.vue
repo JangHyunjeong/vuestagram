@@ -11,10 +11,10 @@
       :class="`${data.filter}`"
       class="post-body"
       :style="{ backgroundImage: `url(${data.postImage})` }"
-      @click="$store.commit('좋아요')"
+      @click="$store.commit('좋아요', idx)"
     ></div>
     <div class="post-content">
-      <p>{{ $store.state.like }} Likes</p>
+      <p>{{ data.likes }} Likes</p>
       <p>
         <strong>{{ data.name }}</strong> {{ data.content }}
       </p>
@@ -29,6 +29,7 @@ export default {
   props: {
     data: Array,
     filter: String,
+    idx: Number,
   },
 };
 </script>
