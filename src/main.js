@@ -14,5 +14,7 @@ app.config.globalProperties.emitter = emitter;
 // vuex 설치
 import store from "./store.js";
 
+import './registerServiceWorker'
+
 // use(store) : 모든 컴포넌트들이 store.js 직접 참고 가능하다.
 app.use(store).mount("#app");
