@@ -10,6 +10,10 @@
     <img src="./assets/logo.png" class="logo" />
   </div>
 
+  {{ $store.state.more }}
+  <!-- actions 실행 부탁 - dispatch  -->
+  <button @click="$store.dispatch('getData')">더보기 버튼</button>
+
   <Container
     :step="step"
     :imgUrl="imgUrl"
@@ -96,7 +100,6 @@ export default {
   data() {
     return {
       //data: data,
-      cnt: 0,
       step: 0,
       imgUrl: "",
       content: "",
@@ -119,25 +122,25 @@ export default {
     Container,
   },
   methods: {
-    more() {
-      axios
-        // post요청은 내가 원하는 데이터를 보내고싶을 때 사용한다.
-        // .post("url", { name: "kim" })
-        // .then()  // 요청 성공시 실행되는 코드
-        // .catch()  // 요청 실패시 실행되는 코드
-        // .catch((err) => { console.log(err)}) // 에러는 이런식으로 메세지 받을 수 있음
+    // more() {
+    //   axios
+    //     // post요청은 내가 원하는 데이터를 보내고싶을 때 사용한다.
+    //     // .post("url", { name: "kim" })
+    //     // .then()  // 요청 성공시 실행되는 코드
+    //     // .catch()  // 요청 실패시 실행되는 코드
+    //     // .catch((err) => { console.log(err)}) // 에러는 이런식으로 메세지 받을 수 있음
 
-        .get(`https://codingapple1.github.io/vue/more${this.cnt}.json`)
-        //.then(function (result) {
-        .then((result) => {
-          // this 가져다 쓰려면 이렇게 쓰셈
-          // get요청 성공시 함수 실행 .then
-          // 요청 성공시 실행할 코드
-          // get 요청으로 가져온 결과값은 result(위에 파라미터) 에 저장된다.
-          this.$store.state.data.push(result.data);
-          this.cnt++;
-        });
-    },
+    //     .get(`https://codingapple1.github.io/vue/more${this.cnt}.json`)
+    //     //.then(function (result) {
+    //     .then((result) => {
+    //       // this 가져다 쓰려면 이렇게 쓰셈
+    //       // get요청 성공시 함수 실행 .then
+    //       // 요청 성공시 실행할 코드
+    //       // get 요청으로 가져온 결과값은 result(위에 파라미터) 에 저장된다.
+    //       this.$store.state.data.push(result.data);
+    //       this.cnt++;
+    //     });
+    // },
 
     changePage(step) {
       this.step = step;
