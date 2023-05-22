@@ -23,6 +23,16 @@
     @more="more"
   />
 
+  <p>{{ now() }} {{ 카운터 }}</p>
+  <button @click="카운터++">버튼</button>
+
+  <p>{{ now2 }} {{ 카운터 }}</p>
+  <button @click="카운터++">버튼</button>
+
+  <p>1. {{ dataName }}</p>
+  <p>2. {{ data[0].name }}</p>
+  <p>3. {{ 작명 }}</p>
+
   <div class="footer">
     <ul class="footer-button-plus">
       <!-- multiple : 여러개의 파일 받기 -->
@@ -71,6 +81,8 @@
 import Container from "./components/Container.vue";
 // import data from "./data.js";
 import axios from "axios";
+import { mapMutations, mapState } from "vuex";
+
 // # 1. ajax 사용하는 법 (get, post로 데이터 요청하기)
 // 1. axios 사용 - 이렇게 많이 씀
 // 2. fetch 함수 사용 - 호환성 문제 좀 있음
@@ -104,6 +116,7 @@ export default {
       imgUrl: "",
       content: "",
       선택한필터: "",
+      카운터: 0,
     };
   },
   mounted() {
@@ -121,7 +134,35 @@ export default {
   components: {
     Container,
   },
+  computed: {
+    // computed 함수는 사용해도 실행되지 않습니다
+    // 처음 실행하고 값을 간직함
+    // 계산 결과 저장용 함수임
+    now2() {
+      return new Date();
+    },
+
+    dataName() {
+      return this.$store.state.data[0].name;
+    },
+
+    // 위에게 너무 길때, 아래 mapState를 사용하면 편리하다.
+    // vuex함수여서 vuex가져와야 사용가능
+    ...mapState(["data"]),
+
+    ...mapState({ 작명: "data" }), // 데이터에 이름 짓고싶을 때, object형식으로 만들수 있다.
+
+    // computed 함수는 항상 return 을 걸어줘야한다.
+  },
   methods: {
+    // store.js의 mutation 함수도 이런식으로 가져올 수 있다.
+    ...mapMutations(["setMore", "좋아요"]),
+
+    // method 함수는 사용할때마다 실행됨
+    now() {
+      return new Date();
+    },
+
     // more() {
     //   axios
     //     // post요청은 내가 원하는 데이터를 보내고싶을 때 사용한다.
