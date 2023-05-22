@@ -10,9 +10,9 @@
     <img src="./assets/logo.png" class="logo" />
   </div>
 
-  {{ $store.state.more }}
   <!-- actions 실행 부탁 - dispatch  -->
-  <button @click="$store.dispatch('getData')">더보기 버튼</button>
+  <!-- {{ $store.state.more }}
+  <button @click="$store.dispatch('getData')">더보기 버튼</button> -->
 
   <Container
     :step="step"
@@ -22,7 +22,7 @@
     @getContent="getContent($event)"
     @more="more"
   />
-
+  <!-- 
   <p>{{ now() }} {{ 카운터 }}</p>
   <button @click="카운터++">버튼</button>
 
@@ -31,7 +31,7 @@
 
   <p>1. {{ dataName }}</p>
   <p>2. {{ data[0].name }}</p>
-  <p>3. {{ 작명 }}</p>
+  <p>3. {{ 작명 }}</p> -->
 
   <div class="footer">
     <ul class="footer-button-plus">
@@ -112,7 +112,7 @@ export default {
   data() {
     return {
       //data: data,
-      step: 0,
+      step: 3,
       imgUrl: "",
       content: "",
       선택한필터: "",
